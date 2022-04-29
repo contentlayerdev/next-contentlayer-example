@@ -1,6 +1,13 @@
 import Head from "next/head";
 import { format, parseISO } from "date-fns";
 import { allPosts, Post } from "contentlayer/generated";
+import { useMDXComponent } from 'next-contentlayer/hooks'
+import Form from "../../components/Form"
+
+// Const that passes custom components to all MDX files in the posts directory
+const MDXcomponents = {
+  Form,
+};
 
 export async function getStaticPaths() {
   const paths: string[] = allPosts.map((post) => post.url);
@@ -22,6 +29,9 @@ export async function getStaticProps({ params }) {
 }
 
 const PostLayout = ({ post }: { post: Post }) => {
+  // Rendering MDX
+  const MDXComponent = useMDXComponent(post.body.code)
+  //
   return (
     <>
       <Head>
@@ -34,7 +44,12 @@ const PostLayout = ({ post }: { post: Post }) => {
           </time>
           <h1>{post.title}</h1>
         </div>
-        <div dangerouslySetInnerHTML={{ __html: post.body.html }} />
+
+        {/* Switch from MD to MDX */}
+        {/* <div dangerouslySetInnerHTML={{ __html: post.body.html }} /> */}
+        <MDXComponent components={MDXcomponents}/>
+        {/*  */}
+
       </article>
     </>
   );
