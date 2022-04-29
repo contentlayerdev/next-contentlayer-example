@@ -11,11 +11,11 @@
     "contentlayer": "latest",
     "next": "12.1.5",
     "next-contentlayer": "latest",
-    "react": "18.0.0",
-    "react-dom": "18.0.0"
+    "react": "^18.1.0",
+    "react-dom": "^18.1.0"
   },
   "devDependencies": {
-    "@types/react": "18.0.4",
+    "@types/react": "^18.0.8",
     "autoprefixer": "^10.4.4",
     "postcss": "^8.4.12",
     "tailwindcss": "^3.0.24",

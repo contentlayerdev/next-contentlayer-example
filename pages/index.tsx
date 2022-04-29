@@ -1,6 +1,13 @@
 import Link from "next/link";
 import { compareDesc, format, parseISO } from "date-fns";
 import { allPosts, Post } from "contentlayer/generated";
+import { useMDXComponent } from 'next-contentlayer/hooks'
+import Form from "../components/Form"
+
+// Const that passes custom components to all MDX files in the posts directory
+const MDXcomponents = {
+  Form,
+};
 
 export async function getStaticProps() {
   const posts: Post[] = allPosts.sort((a, b) => {
@@ -10,6 +17,9 @@ export async function getStaticProps() {
 }
 
 function PostCard(post: Post) {
+  // Rendering MDX
+  const MDXComponent = useMDXComponent(post.body.code)
+  //
   return (
     <div className="mb-8">
       <h2 className="text-xl">
@@ -20,10 +30,10 @@ function PostCard(post: Post) {
       <time dateTime={post.date} className="block text-xs text-gray-600 mb-2">
         {format(parseISO(post.date), "LLLL d, yyyy")}
       </time>
-      <div
-        className="text-sm"
-        dangerouslySetInnerHTML={{ __html: post.body.html }}
-      />
+      {/* Switch from MD to MDX */}
+        {/* <div dangerouslySetInnerHTML={{ __html: post.body.html }} /> */}
+        <MDXComponent components={MDXcomponents}/>
+        {/*  */}
     </div>
   );
 }
