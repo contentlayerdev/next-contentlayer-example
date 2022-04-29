@@ -4,3 +4,6 @@ dist
 .contentlayer
 yarn.lock
 .DS_Store
+.next
+
+.vercel
