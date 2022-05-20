@@ -33,6 +33,15 @@ const PostLayout = ({ post }: { post: Post }) => {
             {format(parseISO(post.date), "LLLL d, yyyy")}
           </time>
           <h1>{post.title}</h1>
+          {post.tags != [] && (
+            <div className="mt-2 inline-flex space-x-2">
+              {post.tags.map(tag => (
+                <span className="text-xs bg-gray-100 py-0.5 px-1.5 rounded">
+                  {tag}
+                </span>
+              ))}
+            </div>
+          )}
         </div>
         <div dangerouslySetInnerHTML={{ __html: post.body.html }} />
       </article>
