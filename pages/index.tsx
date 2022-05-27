@@ -9,17 +9,29 @@ export async function getStaticProps() {
   return { props: { posts } };
 }
 
-function PostCard(post: Post) {
+export function PostCard(post: Post) {
   return (
-    <div className="mb-8">
+    <div>
       <h2 className="text-xl">
         <Link href={post.url}>
           <a className="text-blue-700 hover:text-blue-900">{post.title}</a>
         </Link>
       </h2>
-      <time dateTime={post.date} className="block text-xs text-gray-600 mb-2">
-        {format(parseISO(post.date), "LLLL d, yyyy")}
-      </time>
+      <div className="flex justify-between items-center mb-4">
+        <time dateTime={post.date} className="text-xs text-gray-600">
+          {format(parseISO(post.date), "LLLL d, yyyy")}
+        </time>
+
+        <div className="flex space-x-1">
+          {post.tags.map(tag => (
+            <span className="text-xs bg-gray-200 rounded py-0.5 px-1.5 hover:bg-gray-300">
+              <Link href={`/tags/${tag}`}>
+                {tag}
+              </Link>
+            </span>
+          ))}
+        </div>
+      </div>
       <div
         className="text-sm"
         dangerouslySetInnerHTML={{ __html: post.body.html }}
