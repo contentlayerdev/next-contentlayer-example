@@ -1,3 +1,4 @@
+import { Tags } from "components/Tags";
 import { allPosts, Post } from "contentlayer/generated";
 import Head from "next/head";
 import Link from "next/link";
@@ -63,15 +64,7 @@ const TagLayout = ({ posts, tag }: { posts: Post[], tag: string }) => {
             Other available tags
           </h2>
 
-          <div className="flex space-x-2">
-            {otherTags.map(tag => (
-              <span className="text-xs bg-gray-200 rounded py-0.5 px-1.5 hover:bg-gray-300">
-                <Link href={`/tags/${tag}`}>
-                  {tag}
-                </Link>
-              </span>
-            ))}
-          </div>
+          <Tags tags={otherTags} />
         </div>
       </div>
     </>

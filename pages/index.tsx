@@ -1,6 +1,7 @@
 import Link from "next/link";
 import { compareDesc, format, parseISO } from "date-fns";
 import { allPosts, Post } from "contentlayer/generated";
+import { Tags } from "components/Tags";
 
 export async function getStaticProps() {
   const posts: Post[] = allPosts.sort((a, b) => {
@@ -22,15 +23,7 @@ export function PostCard(post: Post) {
           {format(parseISO(post.date), "LLLL d, yyyy")}
         </time>
 
-        <div className="flex space-x-1">
-          {post.tags.map(tag => (
-            <span className="text-xs bg-gray-200 rounded py-0.5 px-1.5 hover:bg-gray-300">
-              <Link href={`/tags/${tag}`}>
-                {tag}
-              </Link>
-            </span>
-          ))}
-        </div>
+        <Tags tags={post.tags} />
       </div>
       <div
         className="text-sm"
