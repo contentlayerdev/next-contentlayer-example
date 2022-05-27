@@ -7,7 +7,7 @@ type Props = {
 export function Tags({ tags }: Props) {
   return (
     <div className="space-x-1">
-      {tags.map(tag => <Tag tag={tag} />)}
+      {tags.map(tag => <Tag key={tag} tag={tag} />)}
     </div>
   );
 }
