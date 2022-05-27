@@ -1,24 +1,13 @@
 import { Tags } from "components/Tags";
 import { allPosts, Post } from "contentlayer/generated";
 import Head from "next/head";
-import Link from "next/link";
 import { PostCard } from "pages";
-import { unique, without } from "typescript-array-utils";
+import { unique } from "typescript-array-utils";
 
-type Tagged = { tags?: string[] };
-
-const tags = <T extends Tagged>(item: T): string[] => {
-  return item.tags ?? [];
-}
-
-const allTags = <T extends Tagged>(items: T[]): string[] => {
-  return unique(items.flatMap(tags));
-}
-
-const knownTags: string[] = allTags(allPosts);
+const knownTags: string[] = unique(allPosts.flatMap(post => post.tags));
 
 export async function getStaticPaths() {
-  const paths = knownTags.map(tag => `/tags/${tag}`);
+  const paths: string[] = knownTags.map(tag => `/tags/${tag}`);
 
   return {
     paths,
@@ -49,17 +38,15 @@ const TagLayout = ({ posts, tag }: { posts: Post[], tag: string }) => {
         <title>Posts with the tag {tag}</title>
       </Head>
       <div className="max-w-xl mx-auto py-8">
-        <h1 className="text-3xl font-light text-center">
-          Posts with the tag <span className="font-bold">{tag}</span>
-        </h1>
+        <h1 className="text-3xl font-light mb-8 text-center">Posts with the tag <strong>{tag}</strong></h1>
 
-        <div className="py-8">
+        <div>
           {posts.map((post, idx) => (
             <PostCard key={idx} {...post} />
           ))}
         </div>
 
-        <div className="flex items-center justify-between">
+        <div className="flex items-center justify-between mt-12">
           <h2 className="text-xl font-light">
             Other available tags
           </h2>
