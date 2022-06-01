@@ -19,9 +19,11 @@ export function PostCard(post: Post) {
         </Link>
       </h2>
       <div className="flex justify-between items-center mb-4">
-        <time dateTime={post.date} className="text-xs text-gray-600">
-          {format(parseISO(post.date), "LLLL d, yyyy")}
-        </time>
+        <div>
+          <time dateTime={post.date} className="text-xs text-gray-600">
+            {format(parseISO(post.date), "LLLL d, yyyy")}
+          </time>
+        </div>
 
         <Tags tags={post.tags} />
       </div>
