@@ -1,14 +1,15 @@
 import Link from "next/link";
-import { format, parseISO } from "date-fns";
 import { Post } from "contentlayer/generated";
 import { Tags } from "components/Tags";
-import { allPostsByDate } from "lib/content";
+import { allPostsByDate, formatDate } from "lib/content";
 
 export async function getStaticProps() {
   return { props: { posts: allPostsByDate } };
 }
 
 export function PostCard(post: Post) {
+  const formattedDate: string = formatDate(post.date);
+
   return (
     <div>
       <h2 className="text-xl">
@@ -19,7 +20,7 @@ export function PostCard(post: Post) {
       <div className="flex justify-between items-center mb-4">
         <div>
           <time dateTime={post.date} className="text-xs text-gray-600">
-            {format(parseISO(post.date), "LLLL d, yyyy")}
+            {formattedDate}
           </time>
         </div>
 

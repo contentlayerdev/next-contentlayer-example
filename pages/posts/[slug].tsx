@@ -1,8 +1,7 @@
 import Head from "next/head";
-import { format, parseISO } from "date-fns";
 import { Post } from "contentlayer/generated";
 import { Tags } from "components/Tags";
-import { allPostPaths, getPostBySlug } from "lib/content";
+import { allPostPaths, formatDate, getPostBySlug } from "lib/content";
 
 export async function getStaticPaths() {
   return {
@@ -21,6 +20,8 @@ export async function getStaticProps({ params }) {
 }
 
 const PostLayout = ({ post }: { post: Post }) => {
+  const formattedDate: string = formatDate(post.date);
+
   return (
     <>
       <Head>
@@ -29,7 +30,7 @@ const PostLayout = ({ post }: { post: Post }) => {
       <article className="max-w-xl mx-auto py-8">
         <div className="text-center mb-8">
           <time dateTime={post.date} className="text-xs text-gray-600 mb-1">
-            {format(parseISO(post.date), "LLLL d, yyyy")}
+            {formattedDate}
           </time>
           <h1>{post.title}</h1>
           <div className="mt-3">

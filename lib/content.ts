@@ -1,6 +1,6 @@
 import { allPosts, Post } from "contentlayer/generated";
 import { unique } from "typescript-array-utils";
-import { compareDesc } from "date-fns";
+import { compareDesc, format, parseISO } from "date-fns";
 
 // All tags used by blog posts
 const allTags: string[] = unique(allPosts.flatMap((post) => post.tags));
@@ -28,6 +28,10 @@ const allPostsByDate: Post[] = allPosts.sort((a, b) => {
 // Paths for all tags
 const allTagPaths: string[] = allTags.map((tag) => `/tags/${tag}`);
 
+// Formatters
+const formatDate = (date: string): string =>
+  format(parseISO(date), "LLLL d, yyyy");
+
 export {
   allTags,
   allOtherTags,
@@ -36,4 +40,5 @@ export {
   allPostPaths,
   allPostsByDate,
   allTagPaths,
+  formatDate,
 };
