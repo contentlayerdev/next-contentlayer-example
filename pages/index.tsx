@@ -1,13 +1,11 @@
 import Link from "next/link";
-import { compareDesc, format, parseISO } from "date-fns";
-import { allPosts, Post } from "contentlayer/generated";
+import { format, parseISO } from "date-fns";
+import { Post } from "contentlayer/generated";
 import { Tags } from "components/Tags";
+import { allPostsByDate } from "lib/content";
 
 export async function getStaticProps() {
-  const posts: Post[] = allPosts.sort((a, b) => {
-    return compareDesc(new Date(a.date), new Date(b.date));
-  });
-  return { props: { posts } };
+  return { props: { posts: allPostsByDate } };
 }
 
 export function PostCard(post: Post) {

@@ -1,21 +1,18 @@
 import Head from "next/head";
 import { format, parseISO } from "date-fns";
-import { allPosts, Post } from "contentlayer/generated";
-import Link from "next/link";
+import { Post } from "contentlayer/generated";
 import { Tags } from "components/Tags";
+import { allPostPaths, getPostBySlug } from "lib/content";
 
 export async function getStaticPaths() {
-  const paths: string[] = allPosts.map((post) => post.url);
   return {
-    paths,
+    paths: allPostPaths,
     fallback: false,
   };
 }
 
 export async function getStaticProps({ params }) {
-  const post: Post = allPosts.find(
-    (post) => post._raw.flattenedPath === params.slug
-  );
+  const post: Post = getPostBySlug(params.slug);
   return {
     props: {
       post,
