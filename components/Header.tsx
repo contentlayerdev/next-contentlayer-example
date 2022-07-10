@@ -1,8 +1,14 @@
-import Link from 'next/link'
+import Link from "next/link";
 
 function Icon() {
   return (
-    <svg width="22" height="24" viewBox="0 0 22 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <svg
+      width="22"
+      height="24"
+      viewBox="0 0 22 24"
+      fill="none"
+      xmlns="http://www.w3.org/2000/svg"
+    >
       <path
         fillRule="evenodd"
         clipRule="evenodd"
@@ -12,7 +18,7 @@ function Icon() {
         strokeWidth="0.5"
       ></path>
     </svg>
-  )
+  );
 }
 
 function Logo() {
@@ -25,7 +31,7 @@ function Logo() {
         <span className="font-bold">Contentlayer</span>
       </a>
     </Link>
-  )
+  );
 }
 
 export function Header() {
@@ -33,5 +39,5 @@ export function Header() {
     <header className="p-8 flex justify-center">
       <Logo />
     </header>
-  )
+  );
 }

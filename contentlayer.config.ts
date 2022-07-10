@@ -14,6 +14,14 @@ const Post = defineDocumentType(() => ({
       description: 'The date of the post',
       required: true,
     },
+    tags: {
+      type: 'list',
+      of: {
+        type: 'string'
+      },
+      description: 'Optional tags associated with the post',
+      default: []
+    }
   },
   computedFields: {
     url: {

@@ -1,25 +1,31 @@
 import Link from "next/link";
-import { compareDesc, format, parseISO } from "date-fns";
-import { allPosts, Post } from "contentlayer/generated";
+import { Post } from "contentlayer/generated";
+import { Tags } from "components/Tags";
+import { allPostsByDate, formatDate } from "lib/content";
 
 export async function getStaticProps() {
-  const posts: Post[] = allPosts.sort((a, b) => {
-    return compareDesc(new Date(a.date), new Date(b.date));
-  });
-  return { props: { posts } };
+  return { props: { posts: allPostsByDate } };
 }
 
-function PostCard(post: Post) {
+export function PostCard(post: Post) {
+  const formattedDate: string = formatDate(post.date);
+
   return (
-    <div className="mb-8">
+    <div>
       <h2 className="text-xl">
         <Link href={post.url}>
           <a className="text-blue-700 hover:text-blue-900">{post.title}</a>
         </Link>
       </h2>
-      <time dateTime={post.date} className="block text-xs text-gray-600 mb-2">
-        {format(parseISO(post.date), "LLLL d, yyyy")}
-      </time>
+      <div className="flex justify-between items-center mb-4">
+        <div>
+          <time dateTime={post.date} className="text-xs text-gray-600">
+            {formattedDate}
+          </time>
+        </div>
+
+        <Tags tags={post.tags} />
+      </div>
       <div
         className="text-sm"
         dangerouslySetInnerHTML={{ __html: post.body.html }}

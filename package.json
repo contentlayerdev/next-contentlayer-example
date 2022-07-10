@@ -12,7 +12,8 @@
     "next": "12.1.6",
     "next-contentlayer": "latest",
     "react": "18.1.0",
-    "react-dom": "18.1.0"
+    "react-dom": "18.1.0",
+    "typescript-array-utils": "^0.1.4"
   },
   "devDependencies": {
     "@types/react": "18.0.9",
