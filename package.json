@@ -10,7 +10,7 @@
   "dependencies": {
     "contentlayer": "latest",
     "date-fns": "2.29.3",
-    "next": "13.0.2",
+    "next": "13.0.3",
     "next-contentlayer": "latest",
     "react": "18.2.0",
     "react-dom": "18.2.0"
