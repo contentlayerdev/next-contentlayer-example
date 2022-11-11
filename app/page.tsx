@@ -10,7 +10,7 @@ function PostCard(post: Post) {
           {post.title}
         </Link>
       </h2>
-      <time dateTime={post.date} className="block text-xs text-gray-600 mb-2">
+      <time dateTime={post.date} className="block mb-2 text-xs text-gray-600">
         {format(parseISO(post.date), 'LLLL d, yyyy')}
       </time>
       <div className="text-sm" dangerouslySetInnerHTML={{ __html: post.body.html }} />
@@ -19,13 +19,11 @@ function PostCard(post: Post) {
 }
 
 export default function Home() {
-  const posts: Post[] = allPosts.sort((a, b) => {
-    return compareDesc(new Date(a.date), new Date(b.date))
-  })
+  const posts = allPosts.sort((a, b) => compareDesc(new Date(a.date), new Date(b.date)))
 
   return (
-    <div className="max-w-xl mx-auto py-8">
-      <h1 className="text-3xl font-bold mb-8 text-center">Next.js Example</h1>
+    <div className="py-8 mx-auto max-w-xl">
+      <h1 className="mb-8 text-3xl font-bold text-center">Next.js Example</h1>
 
       {posts.map((post, idx) => (
         <PostCard key={idx} {...post} />
