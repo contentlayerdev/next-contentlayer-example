@@ -10,7 +10,7 @@ export default function MyApp({ Component, pageProps }) {
     <>
       <Head>
         <title>Contentlayer Next.js Example</title>
-        <link rel="icon" type="image/x-icon" href="/favicon.png" />
+        <link rel="icon" type="image/x-icon" href="/images/favicon.png" />
       </Head>
 
       <Header />
