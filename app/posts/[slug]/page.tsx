@@ -1,10 +1,18 @@
 import { format, parseISO } from 'date-fns'
 import { allPosts } from 'contentlayer/generated'
+import { getMDXComponent } from 'next-contentlayer/hooks'
 
 export const generateStaticParams = async () => allPosts.map((post) => ({ slug: post._raw.flattenedPath }))
 
+export const generateMetadata = ({ params }) => {
+  const post = allPosts.find((post) => post._raw.flattenedPath === params.slug)
+  return { title: post.title }
+}
+
 const PostLayout = ({ params }: { params: { slug: string } }) => {
   const post = allPosts.find((post) => post._raw.flattenedPath === params.slug)
+
+  const Content = getMDXComponent(post.body.code)
 
   return (
     <article className="py-8 mx-auto max-w-xl">
@@ -14,7 +22,7 @@ const PostLayout = ({ params }: { params: { slug: string } }) => {
         </time>
         <h1>{post.title}</h1>
       </div>
-      <div dangerouslySetInnerHTML={{ __html: post.body.html }} />
+      <Content />
     </article>
   )
 }
